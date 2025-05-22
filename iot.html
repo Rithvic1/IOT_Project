@@ -13,7 +13,6 @@
     <meta property="og:image" content="https://example.com/iot-workshop-2025.jpg">
     <meta property="og:url" content="https://example.com/iot-workshop-2025">
     <meta property="og:type" content="website">
-    <title>IoT Workshop 2025 | Amity University Bengaluru</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -41,6 +40,30 @@
             <h2 class="text-3xl text-gray-600 mt-2">Amity University Bengaluru</h2>
             <p class="text-lg mt-4">Led by <span class="font-semibold">Naveen Kumar</span>, Industry Expert in IoT Solutions</p>
             <p class="text-md mt-2 text-gray-500">May 15-17, 2025 | Auditorium, Bengaluru, India</p>
+            
+            <!-- Countdown Timer -->
+            <div class="countdown-timer bg-blue-50 p-4 rounded-lg shadow-sm mx-auto max-w-md mt-6">
+                <p class="text-gray-700 font-semibold">Workshop begins in:</p>
+                <div class="grid grid-cols-4 gap-2 mt-2">
+                    <div class="bg-white p-2 rounded shadow-sm">
+                        <span id="days" class="block text-2xl font-bold text-blue-600">00</span>
+                        <span class="text-xs text-gray-500">Days</span>
+                    </div>
+                    <div class="bg-white p-2 rounded shadow-sm">
+                        <span id="hours" class="block text-2xl font-bold text-blue-600">00</span>
+                        <span class="text-xs text-gray-500">Hours</span>
+                    </div>
+                    <div class="bg-white p-2 rounded shadow-sm">
+                        <span id="minutes" class="block text-2xl font-bold text-blue-600">00</span>
+                        <span class="text-xs text-gray-500">Minutes</span>
+                    </div>
+                    <div class="bg-white p-2 rounded shadow-sm">
+                        <span id="seconds" class="block text-2xl font-bold text-blue-600">00</span>
+                        <span class="text-xs text-gray-500">Seconds</span>
+                    </div>
+                </div>
+            </div>
+            
             <a href="#register" class="cta-button inline-block mt-6">Register Now!</a>
         </div>
     </header>
@@ -76,7 +99,10 @@
         <div class="container mx-auto px-4">
             <h3 class="text-3xl font-bold text-center mb-8">Meet Our Speaker</h3>
             <div class="flex flex-col md:flex-row items-center max-w-4xl mx-auto">
-                <img src="https://via.placeholder.com/200" alt="Naveen Kumar" class="w-48 h-48 rounded-full mb-6 md:mb-0 md:mr-8">
+                <figure class="mb-6 md:mb-0 md:mr-8">
+                    <img src="https://via.placeholder.com/200" alt="Naveen Kumar" class="w-48 h-48 rounded-full">
+                    <figcaption class="text-sm text-center mt-2 text-gray-600">Naveen Kumar</figcaption>
+                </figure>
                 <div>
                     <h4 class="text-2xl font-semibold">Naveen Kumar</h4>
                     <p class="text-lg text-gray-600">IoT Solutions Architect & Global Mentor</p>
@@ -240,5 +266,38 @@
             <p class="text-center mt-6">© 2025 Amity University Bengaluru. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <!-- Countdown Timer Script -->
+    <script>
+        // Set the date we're counting down to (May 15, 2025)
+        const countdownDate = new Date("May 29, 2025 09:00:00").getTime();
+        
+        // Update the countdown every 1 second
+        const countdownTimer = setInterval(function() {
+            // Get today's date and time
+            const now = new Date().getTime();
+            
+            // Find the distance between now and the countdown date
+            const distance = countdownDate - now;
+            
+            // Time calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Display the result
+            document.getElementById("days").textContent = days.toString().padStart(2, '0');
+            document.getElementById("hours").textContent = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").textContent = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").textContent = seconds.toString().padStart(2, '0');
+            
+            // If the countdown is finished, display a message
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.querySelector(".countdown-timer").innerHTML = "<p class='text-lg font-bold text-blue-600'>The workshop is in progress!</p>";
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
